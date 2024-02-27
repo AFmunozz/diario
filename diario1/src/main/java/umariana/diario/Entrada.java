@@ -8,9 +8,9 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 public class Entrada {
-    
-  ArrayList<Entrada> misEntradas = new ArrayList<>();
-     Scanner  sc = new Scanner (System.in);
+
+    ArrayList<Entrada> misEntradas = new ArrayList<>();
+    Scanner sc = new Scanner(System.in);
     private int idEntrada;
     private String descripcion;
     private Date fecha;
@@ -22,7 +22,7 @@ public class Entrada {
     }
 
     public Entrada() {
-    
+
     }
 
     // Getters and setters
@@ -50,14 +50,12 @@ public class Entrada {
         this.fecha = fecha;
     }
 
+    public void mostrarMenu() {
 
-    
-    public void  mostrarMenu(){
-        
         boolean activo = true;
-        
-        do{
-            
+
+        do {
+
             System.out.println(" __________________");
             System.out.println("DIARIO PERSONAL     ");
             System.out.println("                                     ");
@@ -67,101 +65,100 @@ public class Entrada {
             System.out.println("4. Eliminar Entrada       ");
             System.out.println("5. Salir                          ");
             System.out.println("___________________");
-            
-            
-            
-              int opcion =sc.nextInt();
-            switch(opcion){
-                
+
+            int opcion = sc.nextInt();
+            switch (opcion) {
+
                 case 1:
                     agregarEntrada();
                     break;
                 case 2:
-                     consultarEntrada();
+                    consultarEntrada();
                     break;
                 case 3:
-                        modificarEntrada();
+                    modificarEntrada();
                     break;
                 case 4:
                     eliminarEntrada();
-                        break;
-                  case 5:
-                    activo = false; 
+                    break;
+                case 5:
+                    activo = false;
                     System.out.println("programa finalizado");
                     break;
                 default:
                     System.out.println("opcion no valida");
-                
+
             }
-        }while(activo);
+        } while (activo);
     }
 
-            public void agregarEntrada() {
-            
+    public void agregarEntrada() {
         int tamanoLista = misEntradas.size();
-        Entrada ultimaEntrada = misEntradas.get(tamanoLista - 1);
-        int nuevoIdEntrada = ultimaEntrada.getIdEntrada() + 1;
-                System.out.println("nueva entrada es " + nuevoIdEntrada);
-        
+        int nuevoIdEntrada = 1; // Por defecto, si no hay entradas, el ID es 1
+
+        if (tamanoLista > 0) {
+            Entrada ultimaEntrada = misEntradas.get(tamanoLista - 1);
+            nuevoIdEntrada = ultimaEntrada.getIdEntrada() + 1;
+        }
+
+        System.out.println("nueva entrada es " + nuevoIdEntrada);
 
         System.out.println("Ingrese una descripción:");
-        String descripcion = sc.nextLine(); 
-        
+        sc.nextLine(); // Limpiar el buffer
+        String descripcion = sc.nextLine();
+
         Date fecha = new Date();
         DateFormat formateadorFechaLarga = DateFormat.getDateInstance(DateFormat.LONG);
         System.out.println(formateadorFechaLarga.format(fecha));
-        System.out.println("fecha agregada " + fecha);
 
-   
-
-        Entrada nuevaEntrada = new Entrada(idEntrada, descripcion, fecha);
+        Entrada nuevaEntrada = new Entrada(nuevoIdEntrada, descripcion, fecha);
         misEntradas.add(nuevaEntrada);
         System.out.println("entrada agregada ");
-    
-            }
-    public void consultarEntrada() {
-    System.out.println("Lista de entradas:");
-    for (Entrada entrada : misEntradas) {
-        System.out.println("ID: " + entrada.getIdEntrada());
-        System.out.println("Descripción: " + entrada.getDescripcion());
-        System.out.println("Fecha: " + entrada.getFecha());
-        System.out.println("-----------------------------");
     }
-}
 
-   public void eliminarEntrada(){
-                    System.out.println(" Digite el id del producto que quieres eliminar");
-                    int id = sc.nextInt();
-                    Iterator<Entrada> it = misEntradas.iterator();
-                    
-                    while(it.hasNext()){
-                        Entrada e = it.next();
-                        if(e.getIdEntrada()!=id){
-                        } else {
-                            it.remove();
-                        }
-                        System.out.println("Entrada con id " + id + " ha sido eliminada" );
-                    }
-}
-
-public void modificarEntrada(){
-    
-    System.out.println("Digite el id de la entrada que desea modificar:");
-    int id = sc.nextInt();
-    sc.nextLine(); // Limpiar el buffer
-
-    for (Entrada entrada : misEntradas) {
-        if (entrada.getIdEntrada() == id) {
-            System.out.println("Ingrese la nueva descripcion:");
-            String nuevaDescripcion = sc.nextLine();
-            entrada.setDescripcion(nuevaDescripcion);
-            System.out.println("Descripción actualizada");
-            break;
+    public void consultarEntrada() {
+        System.out.println("Lista de entradas:");
+        for (Entrada entrada : misEntradas) {
+            System.out.println("ID: " + entrada.getIdEntrada());
+            System.out.println("Descripción: " + entrada.getDescripcion());
+            System.out.println("Fecha: " + entrada.getFecha());
+            System.out.println("-----------------------------");
         }
     }
 
-    if (misEntradas.size() == 0) {
-        System.out.println(" no hay ninguna entrada con el id ingresado");
+    public void eliminarEntrada() {
+        System.out.println(" Digite el id del producto que quieres eliminar");
+        int id = sc.nextInt();
+        Iterator<Entrada> it = misEntradas.iterator();
+
+        while (it.hasNext()) {
+            Entrada e = it.next();
+            if (e.getIdEntrada() != id) {
+            } else {
+                it.remove();
+            }
+            System.out.println("Entrada con id " + id + " ha sido eliminada");
+        }
     }
-}
+
+    public void modificarEntrada() {
+
+        System.out.println("Digite el id de la entrada que desea modificar:");
+        int id = sc.nextInt();
+        sc.nextLine(); // Limpiar el buffer
+
+        for (Entrada entrada : misEntradas) {
+            if (entrada.getIdEntrada() == id) {
+                System.out.println("Ingrese la nueva descripcion:");
+                String nuevaDescripcion = sc.nextLine();
+                entrada.setDescripcion(nuevaDescripcion);
+                System.out.println("Descripción actualizada");
+                break;
+            }
+        }
+
+        if (misEntradas.size() == 0) {
+            System.out.println(" no hay ninguna entrada con el id ingresado");
+        }
+    }
 }
