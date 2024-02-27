@@ -25,7 +25,7 @@ public class Entrada {
 
     }
 
-    // Getters and setters
+
     public int getIdEntrada() {
         return idEntrada;
     }
@@ -94,7 +94,7 @@ public class Entrada {
 
     public void agregarEntrada() {
         int tamanoLista = misEntradas.size();
-        int nuevoIdEntrada = 1; // Por defecto, si no hay entradas, el ID es 1
+        int nuevoIdEntrada = 1; /
 
         if (tamanoLista > 0) {
             Entrada ultimaEntrada = misEntradas.get(tamanoLista - 1);
@@ -145,7 +145,7 @@ public class Entrada {
 
         System.out.println("Digite el id de la entrada que desea modificar:");
         int id = sc.nextInt();
-        sc.nextLine(); // Limpiar el buffer
+        sc.nextLine(); 
 
         for (Entrada entrada : misEntradas) {
             if (entrada.getIdEntrada() == id) {
