@@ -1,3 +1,6 @@
+/*
+@ Andres 
+*/
 package umariana.diario;
 
 import java.text.DateFormat;
@@ -127,7 +130,7 @@ public class Entrada {
     }
 
     public void eliminarEntrada() {
-        System.out.println(" Digite el id del producto que quieres eliminar");
+        System.out.println(" Digite el id  que quieres eliminar");
         int id = sc.nextInt();
         Iterator<Entrada> it = misEntradas.iterator();
 
