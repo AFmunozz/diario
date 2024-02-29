@@ -107,7 +107,7 @@ public class Entrada {
         System.out.println("nueva entrada es " + nuevoIdEntrada);
 
         System.out.println("Ingrese una descripción:");
-        sc.nextLine(); // Limpiar el buffer
+        sc.nextLine(); 
         String descripcion = sc.nextLine();
 
         Date fecha = new Date();
